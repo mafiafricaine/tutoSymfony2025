@@ -4,14 +4,19 @@
 {% block title 'Liste de recettes' %}
 
 {% block body %}
-<h1>Liste de recettes</h1>
-<ul>
-    {% for recipe in recipes %}
-    <li>
-        <a href={{ path('app_recipe_show', {id: recipe.id, slug: recipe.slug}) }}>{{ recipe.title }}</a>
-    </li>
-    {% else %}
-        <p>Pas encore de recette !!!</p>
-    {% endfor %}
-</ul>
+    <h1 align="center">Bienvenu dans la liste des Recettes</h1>
+    <div class = "container text-center">
+        <div class = "row">
+            {% for recipe in recipes %}
+                <div class="card max-w-sm col-4 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 my-8 mr-4" data-type="post">
+                    <h2><a href={{ path('app_recipe_show', {id : recipe.id, slug : recipe.slug})}}>{{ recipe.title }} </a></h2>
+                    <img src = "https://pbs.twimg.com/media/EdDUBw0WkAAQLJ1?format=jpg&name=large" width="150" height="200">
+                    <p>Submitted {{ recipe.createdAt |date }}</p> 
+                </div>        
+            {% else %}
+                <p>Pas encore de recette</p>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
+

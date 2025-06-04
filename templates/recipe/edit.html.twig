@@ -2,8 +2,20 @@
 
 {% block title %}#{{ recipe.id }} {{recipe.slug}}{% endblock %}
 {% block body %}
-<h1>{{ recipe.title |title }}</h1>
+{% set nb = 12 %}
+{{ nb }}
+    <div class = "row">
+        <div class= "col-md-6 mx-auto">
+            <h1 align = "center">{{ recipe.title |title }}</h1>
+            {{ form(monForm)}}
+        </div>
+    </div>
 
-{{ form(monForm)}}
+{# {{ form_start(monForm) }}
+    <div class = "d-flex">
+        {{ form_row(monForm.title) }}
+        {{ form_row(monForm.duration) }}
+    </div>
+{{ form_end(monForm) }} #}
 
 {% endblock %}
