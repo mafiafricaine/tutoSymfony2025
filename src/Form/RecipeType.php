@@ -13,6 +13,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\String\Slugger\AsciiSlugger;
+use Symfony\Component\Validator\Constraints\Length;
 
 class RecipeType extends AbstractType
 {
@@ -20,7 +21,8 @@ class RecipeType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-                'label' => 'Titre'
+                'label' => 'Titre',
+                // 'constraints' => new Length(min: 10, minMessage: "Valeur trop petite, 10 minimum")
             ])
             ->add('slug', HiddenType::class)
             ->add('content', TextareaType::class)
