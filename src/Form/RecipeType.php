@@ -26,6 +26,7 @@ class RecipeType extends AbstractType
             ])
             ->add('slug', HiddenType::class)
             ->add('content', TextareaType::class)
+            ->add('imageName')
             ->add('duration')
             ->add('save',SubmitType::class, [
                 "label" => "Envoyer"

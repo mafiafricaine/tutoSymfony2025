@@ -7,7 +7,7 @@
 		<article>
             <h1> {{ recipe.title |title }}</h1>
             <br>
-            <img style="max-width: 400px;" class="bd-placeholder-img" src="https://i.pinimg.com/736x/f8/23/55/f82355b1fe02234d7354a522347617eb.jpg">
+            <img style="max-width: 400px;" class="bd-placeholder-img" src={{ recipe.imageName }}>
             <p>Recette créée par {{ user.firstname }} {{ user.lastname }}</p>
             <br>
             <h5>{{ recipe.content | nl2br }}</h5>
