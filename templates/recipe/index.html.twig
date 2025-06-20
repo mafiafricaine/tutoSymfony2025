@@ -12,7 +12,7 @@
                 <div class="card max-w-sm col-4 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 my-8 mr-4" data-type="post">
                     <h2><a href={{ path('app_recipe_show', {id : recipe.id, slug : recipe.slug})}}>{{ recipe.title | u.truncate(20,'...',true)}} </a></h2>
                     <p><img src = {{ recipe.imageName }} width="250" height="370"></p>
-                    <p>Submitted {{ recipe.createdAt |ago(locale='fr') }}</p> 
+                    <p>Submitted {{ recipe.createdAt |ago }}</p> 
                     <p>By {{ recipe.user.firstname }} {{ recipe.user.lastname }}</p>
                 </div>        
             {% else %}

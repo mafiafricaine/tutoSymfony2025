@@ -1,0 +1,20 @@
+recipeForm.title: Titre
+recipeForm.content: Description
+recipeForm.duration: 'Durée en minutes'
+recipeForm.imageName: "Lien de l'Image"
+recipeForm.save: Enregistrer
+navBar.home: Accueil
+navBar.recipes: 'Liste des Recettes'
+navBar.addRecipe: 'Ajouter une recette'
+navBar.signUp: "S'enregistrer"
+navBar.logout: 'Se déconnecter'
+navBar.login: 'Se connecter'
+navBar.account: 'Mon compte'
+registerTemplate.title: Inscription
+registerTemplate.button: "S'enregistrer"
+registrationForm:
+  firstname: Prénom
+  lastname: Nom
+  email: "Adresse électronique"
+  password: "Mot de Passe"
+  agreeTerms: "Accepter les termes"
