@@ -12,9 +12,8 @@ navBar.login: 'Se connecter'
 navBar.account: 'Mon compte'
 registerTemplate.title: Inscription
 registerTemplate.button: "S'enregistrer"
-registrationForm:
-  firstname: Prénom
-  lastname: Nom
-  email: "Adresse électronique"
-  password: "Mot de Passe"
-  agreeTerms: "Accepter les termes"
+registrationForm.firstname: Prénom
+registrationForm.lastname: Nom
+registrationForm.email: 'Adresse électronique'
+registrationForm.password: 'Mot de Passe'
+registrationForm.agreeTerms: 'Accepter les termes'
