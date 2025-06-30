@@ -14,18 +14,19 @@ use App\Repository\RecipeRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class RecipeController extends AbstractController
 {
     #[Route(path: "/recette", name: "app_recipe_index")]
-    public function index(Request $request, RecipeRepository $repository, EntityManagerInterface $em): Response{        
+    public function index(Request $request, RecipeRepository $repository, EntityManagerInterface $em, TranslatorInterface $translator): Response{        
         if($this->getUser()){
             /**
             * @var User
             */
             $user = $this->getUser();
             if(!$user->isVerified()){
-                $this->addFlash("info","Your email address is not verified !");
+                $this->addFlash("info",$translator->trans("recipeController.index.emailNotVerified"));
             }
         }
         // return new Response("Bienvenue sur la page des recettes");
@@ -94,22 +95,22 @@ final class RecipeController extends AbstractController
     }
 
     #[Route(path: "/recette/{id}/edit", name: "app_recipe_edit")]
-    public function edit(Recipe $recipe, Request $request, EntityManagerInterface $em): Response{
+    public function edit(Recipe $recipe, Request $request, EntityManagerInterface $em, TranslatorInterface $translator): Response{
         if($this->getUser()){
             /**
             * @var User
             */
             $user = $this->getUser();
             if(!$user->isVerified()){
-                $this->addFlash("error", "You must confirm your email to edit a Recipe !");
+                $this->addFlash("error", $translator->trans("recipeController.edit.confirmEmail"));
                 return $this->redirectToRoute('app_recipe_index');
             }
             if($user->getEmail() !== $recipe->getUser()->getEmail()){
-                $this->addFlash("error", "You must to be ". $recipe->getUser()->getEmail() . " to edit this Recipe !");
+                $this->addFlash("error", $translator->trans("recipeController.edit.userRecipe1"). $recipe->getUser()->getEmail() . $translator->trans("recipeController.edit.userRecipe2"));
                 return $this->redirectToRoute('app_recipe_index');
             }    
         }else{
-            $this->addFlash("error", "You must login to edit a Recipe !");
+            $this->addFlash("error", $translator->trans("recipeController.edit.mustLogin"));
             return $this->redirectToRoute("app_login");
         }
         // dd($recipe);
@@ -120,7 +121,7 @@ final class RecipeController extends AbstractController
             $recipe->setUpdatedAt(new DateTimeImmutable());
             $em->flush();
             // return $this->redirectToRoute('app_recipe_index');
-            $this->addFlash('success', 'La recette a bien été modifiée');
+            $this->addFlash('success', $translator->trans('recipeController.edit.recipeEditConfirm'));
             return $this->redirectToRoute('app_recipe_show', ['slug' => $recipe->getSlug(), 'id' => $recipe->getId() ]);
         }
         return $this->render('recipe/edit.html.twig', [
@@ -130,18 +131,18 @@ final class RecipeController extends AbstractController
     }
 
     #[Route(path: "/recette/create", name: "app_recipe_create")]
-    public function create(Request $request, EntityManagerInterface $em): Response{
+    public function create(Request $request, EntityManagerInterface $em, TranslatorInterface $t): Response{
         if($this->getUser()){
             /**
             * @var User
             */
             $user = $this->getUser();
             if(!$user->isVerified()){
-                $this->addFlash("error", "You must confirm your email to create a Recipe !");
+                $this->addFlash("error", $t->trans("recipeController.create.mustConfirmEmail"));
                 return $this->redirectToRoute('app_recipe_index');
             }
         }else{
-            $this->addFlash("error", "You must login to create a Recipe !");
+            $this->addFlash("error", $t->trans("recipeController.create.mustLogin"));
             return $this->redirectToRoute("app_login");
         }
         
@@ -154,7 +155,7 @@ final class RecipeController extends AbstractController
                     ->setUpdatedAt(new DateTimeImmutable());
             $em->persist($recipe);
             $em->flush();
-            $this->addFlash('success', 'La recette ' . $recipe->getTitle(). 'a bien été créée');
+            $this->addFlash('success', $t->trans('recipeController.create.p1') . $recipe->getTitle(). $t->trans('recipeController.create.p2'));
             return $this->redirectToRoute('app_recipe_index');
         }
         return $this->render('recipe/create.html.twig', [

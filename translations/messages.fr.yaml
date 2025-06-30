@@ -17,3 +17,14 @@ registrationForm.lastname: Nom
 registrationForm.email: 'Adresse électronique'
 registrationForm.password: 'Mot de Passe'
 registrationForm.agreeTerms: 'Accepter les termes'
+recipeController.emailNotVerified: "Ton adresse mail n'est pas vérifiée !"
+recipeController.edit.confirmEmail: 'Vous devez confirmer votre adresse mail pour éditer une recette !'
+recipeController.edit.userRecipe1: 'Vous devez être '
+recipeController.edit.userRecipe2: ' pour editer cette recette !'
+recipeController.edit.mustLogin: 'Vous devez vous identifier pour editer une recette !'
+recipeController.edit.recipeEditConfirm: 'La recette a bien été modifiée !'
+recipeController.create.mustConfirmEmail: 'Vous devez confirmer votre adresse mail pour créer une recette !'
+recipeController.create.mustLogin: 'Vous devez vous identifier pour créer une recette !'
+recipeController.create.p1: 'La recette '
+recipeController.create.p2: ' a bien été créée'
+recipeController.index.emailNotVerified: __recipeController.index.emailNotVerified
