@@ -1,3 +1,5 @@
+vich_uploader.form_label.delete_confirm: 'Supprimer?'
+vich_uploader.link.download: Télécharger
 recipeForm.title: Titre
 recipeForm.content: Description
 recipeForm.duration: 'Durée en minutes'
@@ -27,4 +29,22 @@ recipeController.create.mustConfirmEmail: 'Vous devez confirmer votre adresse ma
 recipeController.create.mustLogin: 'Vous devez vous identifier pour créer une recette !'
 recipeController.create.p1: 'La recette '
 recipeController.create.p2: ' a bien été créée'
-recipeController.index.emailNotVerified: __recipeController.index.emailNotVerified
+recipeController.index.emailNotVerified: "Votre compte n'est pas vérifié"
+accountShow.profile: 'Mon Profil'
+accountShow.Accountcreatedon: 'Date de création du compte : '
+accountShow.EditAccount: 'Modifier le compte'
+'You are logged in as': 'Tu es connecté en tant que '
+'Please sign in': 'Veuillez vous connecter'
+'Forgot Password ?': 'Mot de passe oublié ?'
+'Not Registred yet ?': 'Pas encore de compte ?'
+'Create an account': 'Créer un compte'
+'Account successfuly updated !': 'Compte bien modifié !'
+'Update Profile': 'Mise à jour du profil'
+'Apply changes': 'Appliquer les changements'
+userForm.firstname: Prénom
+userForm.lastname: Nom
+accountController.show.mustLogin: 'Vous devez vous connecté pour accéder à votre profil !'
+accountController.edit.mustLogin: 'Vous devez vous connecté pour modifier votre profil !'
+'registrationController.register.Already Connected !': 'Déjà connecté !'
+'registrationController.register.Go check your email to confirm your registration !': 'Veuillez verifier votre boite mail pour confirmer votre inscription !'
+'registrationController.verifyUserEmail.Your email address has been verified.': 'Votre email est verifié !'

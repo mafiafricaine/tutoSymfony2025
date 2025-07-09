@@ -13,13 +13,14 @@ use Symfony\Component\Routing\Attribute\Route;
 use App\Repository\RecipeRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class RecipeController extends AbstractController
 {
     #[Route(path: "/recette", name: "app_recipe_index")]
-    public function index(Request $request, RecipeRepository $repository, EntityManagerInterface $em, TranslatorInterface $translator): Response{        
+    public function index(Request $request, RecipeRepository $repository, EntityManagerInterface $em, TranslatorInterface $translator, PaginatorInterface $paginator): Response{        
         if($this->getUser()){
             /**
             * @var User
@@ -30,7 +31,10 @@ final class RecipeController extends AbstractController
             }
         }
         // return new Response("Bienvenue sur la page des recettes");
-        $recipes = $repository->findAll();
+        $data = $repository->findAll();
+        $recipes = $paginator->paginate(
+            $data,$request->query->getInt('page',1),6
+        );
         //permet d'afficher les recettes qui ont moins d'une durée donnée en paramètre
         // $recipes = $repository->findRecipeDurationLowerThan(60);
         // dump($recipes);
