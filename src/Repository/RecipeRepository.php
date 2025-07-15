@@ -3,8 +3,11 @@
 namespace App\Repository;
 
 use App\Entity\Recipe;
+use App\Model\SearchData;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @extends ServiceEntityRepository<Recipe>
@@ -31,13 +34,20 @@ class RecipeRepository extends ServiceEntityRepository
            ;
        }
 
-    //    public function findOneBySomeField($value): ?Recipe
-    //    {
-    //        return $this->createQueryBuilder('r')
-    //            ->andWhere('r.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+       public function findBySearch(SearchData $searchData): Query
+       {
+            $data = $this->createQueryBuilder('r')
+            ->addOrderBy('r.createdAt', 'DESC');
+        if (!empty($searchData->q)) {
+            $data = $data
+                //recherche que sur le titre
+                ->andWhere('r.title LIKE :q')
+                //Si on veut rajouter aussi la recherche dans le contenu
+                // ->orWhere('r.content LIKE :query')
+                ->setParameter('q', "%{$searchData->q}%");
+        }
+        
+        return $data
+            ->getQuery();
+        }
 }

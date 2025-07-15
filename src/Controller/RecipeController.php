@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Recipe;
 use App\Entity\User;
 use App\Form\RecipeType;
+use App\Form\SearchType;
+use App\Model\SearchData;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,10 +33,35 @@ final class RecipeController extends AbstractController
             }
         }
         // return new Response("Bienvenue sur la page des recettes");
+
+        //pagination
         $data = $repository->findAll();
+        $recipeTotal = $repository->findAll();
         $recipes = $paginator->paginate(
             $data,$request->query->getInt('page',1),6
         );
+
+        //barre de recherche
+        $searchData = new SearchData();
+        $form = $this->createForm(SearchType::class, $searchData);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $searchData->page = $request->query->getInt('page', 1);
+            $nbRecipesFind =  $paginator->paginate($repository->findBySearch($searchData));
+            $recipesSearch = $paginator->paginate(
+                $repository->findBySearch($searchData),
+                $request->query->get('page', 1),
+                6
+            );
+          
+            return $this->render('recipe/index.html.twig',[
+                'recipes' => $recipesSearch,
+                'recipeTotal' => $nbRecipesFind,
+                'monForm' => $form
+        ]);
+        }
+
+
         //permet d'afficher les recettes qui ont moins d'une durée donnée en paramètre
         // $recipes = $repository->findRecipeDurationLowerThan(60);
         // dump($recipes);
@@ -61,7 +88,9 @@ final class RecipeController extends AbstractController
         //comment récuperer nos recettes sans appeler le RecipeRepository
         // $recipes = $em->getRepository(Recipe::class)->findAll();
         return $this->render('recipe/index.html.twig',[
-            'recipes' => $recipes
+            'recipes' => $recipes,
+            'recipeTotal' => $recipeTotal,
+            'monForm' => $form->createView()
         ]);
     }
 
