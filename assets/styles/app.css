@@ -18,3 +18,7 @@ body {
 .alert-info {
     background-color: blue;
 }
+
+body {
+  font-family: "Twemoji Country Flags", "Helvetica", "Comic Sans", serif;
+}

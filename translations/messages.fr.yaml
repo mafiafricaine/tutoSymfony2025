@@ -48,3 +48,4 @@ accountController.edit.mustLogin: 'Vous devez vous connecté pour modifier votre
 'registrationController.register.Already Connected !': 'Déjà connecté !'
 'registrationController.register.Go check your email to confirm your registration !': 'Veuillez verifier votre boite mail pour confirmer votre inscription !'
 'registrationController.verifyUserEmail.Your email address has been verified.': 'Votre email est verifié !'
+'Welcome to recipe life': 'Bienvenue sur Recette Vie'
